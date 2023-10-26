@@ -19,7 +19,7 @@
 
             <div class="col-12 mt-3">
                 <label for="content" class="form-label">Contenuto</label>
-                <textarea type="text" name="content" id="content" rows="5" class="form-control">{{ $project->tile }}</textarea>
+                <textarea name="content" id="content" class="form-control" rows="5"></textarea>
             </div>
 
             <div class="col-12 mt-3">

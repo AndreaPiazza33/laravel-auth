@@ -41,9 +41,10 @@ class ProjectController extends Controller
         $data = $request->all();
         
         $project = new Project();
-        $project->fill($data);
+        $project->title = $data['title'];
+        $project->description = $data['content'];
+        $project->link = $data['link'];
         $project->slug = Str::slug($project->title);
-
         $project->save();
 
         return redirect()->route('admin.projects.show', $project);
@@ -81,7 +82,9 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $data = $request->all();
-        $project->fill($data);
+        $project->title = $data['title'];
+        $project->description = $data['content'];
+        $project->link = $data['link'];
         $project->slug = Str::slug($project->title);
         $project->save();
 
@@ -92,10 +95,11 @@ class ProjectController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Http\Response
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('admin.projects.index');
     }
 }

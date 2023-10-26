@@ -40,6 +40,11 @@
                             <a href="{{ route('admin.projects.edit', $project) }}">
                                 <i class="fa-solid fa-pencil"></i>
                             </a>
+
+                            <a href="javascript:void(0)" class="text-danger" data-bs-toggle="modal"
+                                data-bs-target="#delete-post-modal-{{ $project->id }}">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                 @empty
@@ -53,4 +58,31 @@
 
         {{ $projects->links('pagination::bootstrap-5') }}
     </div>
+@endsection
+
+@section('modals')
+    @foreach ($projects as $project)
+        <div class="modal fade" id="delete-post-modal-{{ $project->id }}" data-bs-backdrop="static"
+            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Conferma eliminazione</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Vuoi eliminare questo progetto "{{ $project->title }}"?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                        <form method="POST" action="{{ route('admin.projects.destroy', $project) }}">
+                            @method('DELETE')
+                            @csrf
+                            <button class="btn btn-danger">Elimina</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
