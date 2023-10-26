@@ -6,6 +6,11 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endsection
 
+@section('content-header')
+    <h1 class="my-3">Lista Progetti</h1>
+    <a href='{{ route('admin.projects.create') }}' class="btn btn-primary mt-3">Crea Progetto</a>
+@endsection
+
 @section('content')
     <div class="container">
         <table class="table">

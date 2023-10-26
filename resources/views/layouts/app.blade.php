@@ -25,7 +25,11 @@
     <div id="app">
         @include('partials._navbar')
 
-        <main class="">
+        <main>
+            <header class="container py-5">
+                @yield('content-header')
+            </header>
+
             @yield('content')
         </main>
     </div>

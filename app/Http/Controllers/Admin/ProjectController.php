@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -15,29 +16,39 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(10);
+        $projects = Project::orderByDesc('id')->paginate(10);
         return view('admin.projects.index', compact('projects'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        
+        $project = new Project();
+        $project->title = $data['title'];
+        $project->description = $data['content'];
+        $project->link = $data['link'];
+        $project->slug = Str::slug($project->title);
+
+        $project->save();
+
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**
