@@ -41,9 +41,7 @@ class ProjectController extends Controller
         $data = $request->all();
         
         $project = new Project();
-        $project->title = $data['title'];
-        $project->description = $data['content'];
-        $project->link = $data['link'];
+        $project->fill($data);
         $project->slug = Str::slug($project->title);
 
         $project->save();
@@ -66,11 +64,11 @@ class ProjectController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Http\Response
      */
     public function edit(Project $project)
-    {
-        //
+    {   
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -78,11 +76,16 @@ class ProjectController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $data = $request->all();
+        $project->fill($data);
+        $project->slug = Str::slug($project->title);
+        $project->save();
+
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**

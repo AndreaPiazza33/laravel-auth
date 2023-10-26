@@ -33,8 +33,13 @@
                         <td>{{ $project->link }}</td>
                         <td>{{ $project->slug }}</td>
                         <td>
-                            <a href="{{ route('admin.projects.show', $project) }}"><i
-                                    class="fa-solid fa-up-right-from-square"></i></a>
+                            <a href="{{ route('admin.projects.show', $project) }}">
+                                <i class="fa-solid fa-up-right-from-square"></i>
+                            </a>
+
+                            <a href="{{ route('admin.projects.edit', $project) }}">
+                                <i class="fa-solid fa-pencil"></i>
+                            </a>
                         </td>
                     </tr>
                 @empty
