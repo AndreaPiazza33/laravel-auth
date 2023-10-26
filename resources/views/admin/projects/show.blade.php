@@ -2,7 +2,9 @@
 
 @section('content-header')
     <h1>{{ $project->title }}</h1>
-    <a href='{{ route('admin.projects.index') }}' class="btn btn-primary mt-3">Torna alla vista</a>
+    <a href='{{ route('admin.projects.index') }}' class="btn btn-primary mt-3">Torna alla lista</a>
+
+    <a href='{{ route('admin.projects.edit', $project) }}' class="btn btn-primary mt-3">Modifica il progetto</a>
 @endsection
 
 @section('content')

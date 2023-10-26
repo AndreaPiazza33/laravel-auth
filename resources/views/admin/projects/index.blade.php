@@ -30,7 +30,7 @@
                         <th scope="row">{{ $project->id }}</th>
                         <td>{{ $project->title }}</td>
                         <td>{{ $project->description }}</td>
-                        <td>{{ $project->link }}</td>
+                        <td><a href="#">{{ $project->link }}</a></td>
                         <td>{{ $project->slug }}</td>
                         <td>
                             <a href="{{ route('admin.projects.show', $project) }}">
