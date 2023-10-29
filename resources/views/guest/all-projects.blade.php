@@ -14,6 +14,11 @@
                             {{ $project->description }}
                             <hr>
                             <a href="javascript:void(0)">{{ $project->link }}</a>
+
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-primary" href="{{ route('guest.projects.detail', $project) }}">Vai al
+                                dettaglio</a>
                         </div>
                     </div>
                 </div>
@@ -23,11 +28,8 @@
                 </div>
             @endforelse
         </div>
-        <div class="my-3">
-            <a href="{{ route('guest.projects.all') }}">Vedi tutti i Progetti</a>
-        </div>
 
 
-        {{-- {{ $projects->links('pagination::bootstrap-5') }} --}}
+        {{ $projects->links('pagination::bootstrap-5') }}
     </section>
 @endsection
