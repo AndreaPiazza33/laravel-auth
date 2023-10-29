@@ -9,6 +9,19 @@
 
 @section('content')
     <div class="container">
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                Correggi i seguenti errori
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
+
+    <div class="container">
         <form method="POST" action="{{ route('admin.projects.update', $project) }}" class="row">
             @method('PATCH')
             @csrf
@@ -18,8 +31,8 @@
             </div>
 
             <div class="col-12 mt-3">
-                <label for="content" class="form-label">Contenuto</label>
-                <textarea name="content" id="content" class="form-control" rows="5"></textarea>
+                <label for="description" class="form-label">Contenuto</label>
+                <textarea name="description" id="description" class="form-control" rows="5"></textarea>
             </div>
 
             <div class="col-12 mt-3">

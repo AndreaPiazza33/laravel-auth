@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -36,14 +38,12 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         
         $project = new Project();
-        $project->title = $data['title'];
-        $project->description = $data['content'];
-        $project->link = $data['link'];
+        $project->fill($data);
         $project->slug = Str::slug($project->title);
         $project->save();
 
@@ -79,12 +79,10 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        $data = $request->all();
-        $project->title = $data['title'];
-        $project->description = $data['content'];
-        $project->link = $data['link'];
+        $data = $request->validated();
+        $project->fill($data);
         $project->slug = Str::slug($project->title);
         $project->save();
 
